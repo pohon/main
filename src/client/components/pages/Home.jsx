@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Home = ( props ) => (
-  <div className="box blue"> Home </div>
+  <section className="cd-section blue container">&nbsp;</section>
 );
 
 export default Home;

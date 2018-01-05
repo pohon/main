@@ -3,7 +3,6 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 
   #app{
-    margin:10px;
     background: white;
   }
 
@@ -36,8 +35,68 @@ body {
     height:200px;
   }
 
-  .active{    
-    background-color: #4B77FF;
-    color:#fff;
+}
+
+@media (min-width: 992px) { 
+
+  nav{
+
+    &.cd-side-navigation{
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 90px;
+      background-color: #131519;
+      z-index: 10;
+
+      .nav-item{
+
+        .nav-link{
+          text-align: center;
+          color: #4a5261;
+          font-size: 12px;
+          height: 90px;
+          margin-right: -3px;
+          border-right: 3px solid transparent;
+
+          &.active{
+            background-color: #fff;
+            color: #131519;
+            margin-right: 0px;
+            border-right: 0px;
+          }
+
+          &:hover{
+            border-right-color: #FC2C3D;         
+          }
+        }
+
+        svg{
+          display: block;
+          margin: 15px auto 5px;
+        }
+      }
+    }
   }
+
+  .cd-section{
+    
+    transition: all .5s cubic-bezier(0.39, 0.58, 0.57, 1);
+    
+    // top: 0; harus dynamic nih
+    // left: 0;
+    height: 90px;
+    width: 95px;
+    overflow: hidden;
+    backface-visibility: hidden;
+  }
+
+  .cd-side-container{
+    position: relative;
+    z-index: 2;
+    padding-left: 90px;
+    background-color: #4a5261;
+  }
+
 }

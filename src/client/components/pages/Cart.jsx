@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Cart = ( props ) => (
-  <div className="box green"> Cart </div>
+  <section className="cd-section green container">&nbsp;</section>
 );
 
 export default Cart;
