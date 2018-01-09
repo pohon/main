@@ -197,20 +197,25 @@ export default class SideNavigation extends React.Component{
 
     // hidden > shown
     hoverMenuIcon(e){
-
         const getTop = e.target.getBoundingClientRect().top;
-        
-        this.setState({
-            loadingBarStatus : 'shown',
-            loadingBarTop : getTop
-        });
+        // pokoe selama gk lg scaling, boleh show
+        if(this.state.loadingBarStatus !== 'scaling'){
+            console.log('STATUS APA SIH :', this.state.loadingBarStatus);
+            this.setState({
+                loadingBarStatus : 'shown',
+                loadingBarTop : getTop
+            });
+            
+        }
     }
 
     // shown > scaling
     clickMenuIcon(e){
+        if(this.state.loadingBarStatus === 'shown'){
             this.setState({
                 loadingBarStatus : 'scaling'
             });
+        }
     }
 
     // scaling > scaled
@@ -224,15 +229,18 @@ export default class SideNavigation extends React.Component{
         });
     }
 
+    // shown > hidden
     unhoverMenuIcon(e){
-        this.setState({
-            loadingBarStatus : 'hidden'
-        });
+        if(this.state.loadingBarStatus === 'shown'){
+            this.setState({
+                loadingBarStatus : 'hidden'
+            });
+        }        
     }
 
     render(){
         const { arrMenu, loadingBarStatus, loadingBarTop } = this.state;
-        console.log('loadingBarStatus', loadingBarStatus);
+        console.log('status :', loadingBarStatus);
         return(
             <div>
                 <nav className="cd-side-navigation">                    
