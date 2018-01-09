@@ -3,8 +3,8 @@ import React from 'react';
 //NavLink must be placed under component <BrowserRouter>
 import { NavLink } from 'react-router-dom';
 import AppRouter from './AppRouter.jsx';
-import ListSideNav from './menu/list-side-nav.jsx';
-
+import SideNavLi from './menu/side-nav-li.jsx';
+import SideNavLoadingBar from './menu/side-nav-loading-bar.jsx';
 
 const homeIconPath = (
     <svg
@@ -166,7 +166,7 @@ export default class SideNavigation extends React.Component{
             arrMenu : [
                 {
                     listIsActive : false,
-                    listIsExact : false,
+                    listIsExact : true,
                     listTo : '/',
                     listIcon : homeIconPath,
                     listText : 'Home'
@@ -185,47 +185,75 @@ export default class SideNavigation extends React.Component{
                     listIcon : projectsIconPath,
                     listText : 'Cart'
                 }
-            ]
+            ],
+            loadingBarStatus : 'hidden', // hidden, shown, scaling, scaled
+            loadingBarTop : '0px'
         };
 
         this.clickMenuIcon = this.clickMenuIcon.bind(this);
+        this.hoverMenuIcon = this.hoverMenuIcon.bind(this);
+        this.unhoverMenuIcon = this.unhoverMenuIcon.bind(this);
     }
 
-    clickMenuIcon(e){
-        this.setState({
+    // hidden > shown
+    hoverMenuIcon(e){
 
+        const getTop = e.target.getBoundingClientRect().top;
+        
+        this.setState({
+            loadingBarStatus : 'shown',
+            loadingBarTop : getTop
         });
-    };
+    }
+
+    // shown > scaling
+    clickMenuIcon(e){
+            this.setState({
+                loadingBarStatus : 'scaling'
+            });
+    }
+
+    // scaling > scaled
+    componentDidMount(){      
+        const loadingBar = document.getElementById('loading_bar');
+        loadingBar.addEventListener('webkitTransitionEnd', (e) => {
+            // console.log('animation completed');
+            if(this.state.loadingBarStatus === 'scaling'){
+                this.setState({loadingBarStatus : 'scaled'});
+            }            
+        });
+    }
+
+    unhoverMenuIcon(e){
+        this.setState({
+            loadingBarStatus : 'hidden'
+        });
+    }
 
     render(){
-        const { arrMenu } = this.state;
+        const { arrMenu, loadingBarStatus, loadingBarTop } = this.state;
+        console.log('loadingBarStatus', loadingBarStatus);
         return(
             <div>
                 <nav className="cd-side-navigation">                    
                     <ul className="nav flex-column">
-                        {/* <li className="nav-item"><NavLink className="nav-link" activeClassName="active"  
-                                exact to="/" 
-                                onClick={this.clickMenuIcon}>{homeIconPath}Home</NavLink></li>
-                        <li className="nav-item"><NavLink className="nav-link" activeClassName="active" 
-                                to="/dashboard" 
-                                onClick={this.clickMenuIcon}>{servicesIconPath}Dashboard</NavLink></li>
-                        <li className="nav-item"><NavLink className="nav-link" activeClassName="active"  
-                                to="/cart" 
-                                onClick={this.clickMenuIcon}>{projectsIconPath}Cart</NavLink></li> */}
-
-                        {arrMenu.map(function(val, idx){
-                            return (    
-                                        <ListSideNav key={idx}
+                        {arrMenu.map((val, idx) => {
+                            return (
+                                        <SideNavLi key={idx}
                                                 listIsExact = {val.listIsExact}
                                                 listTo = {val.listTo}
+                                                listOnClick = {this.clickMenuIcon}
+                                                listOnMouseEnter = {this.hoverMenuIcon}
+                                                listOnMouseOut = {this.unhoverMenuIcon}
                                                 listIcon = {val.listIcon}
                                                 listText = {val.listText}
                                         />
                                     );
                         })}
-
                     </ul>
                 </nav>
+                <SideNavLoadingBar loadingBarStatus = {this.state.loadingBarStatus} 
+                                   loadingBarTop = {this.state.loadingBarTop} />
                 <div className="cd-side-container">
                     <AppRouter />
                 </div>

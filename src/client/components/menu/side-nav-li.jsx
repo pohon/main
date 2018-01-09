@@ -1,17 +1,15 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-export default class ListSideNav extends React.Component{
+export default class SideNavLi extends React.Component{
 
-    constructor(props){
-        
-        super(props);
-            
+    constructor(props){        
+        super(props);            
     }
 
     render(){
 
-        const { listTo, listOnClick, listText, listIcon, listIsExact } = this.props;
+        const { listTo, listOnClick, listOnMouseEnter, listOnMouseOut, listText, listIcon, listIsExact } = this.props;
         
         return(
             <li className="nav-item">
@@ -19,7 +17,9 @@ export default class ListSideNav extends React.Component{
                          activeClassName = "active"
                          exact={listIsExact}
                          to = {listTo}
-                         onClick = {listOnClick}>
+                         onClick = {listOnClick}
+                         onMouseEnter = {listOnMouseEnter}
+                         onMouseLeave = {listOnMouseOut}>
                             {listIcon}{listText}
                 </NavLink>
             </li>
