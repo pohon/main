@@ -211,9 +211,7 @@ export default class SideNavigation extends React.Component{
     // // shown > scaling
     clickMenuIcon(e){
         if(this.state.loadingBarStatus === 'shown'){
-            this.setState({
-                loadingBarStatus : 'scaling'
-            });
+            this.setState({loadingBarStatus : 'scaling'});
         }
     }
 
@@ -221,7 +219,7 @@ export default class SideNavigation extends React.Component{
     componentDidMount(){      
         const loadingBar = document.getElementById('loading_bar');
         loadingBar.addEventListener('webkitTransitionEnd', (e) => {
-            // console.log('animation completed');
+            console.log('animation completed');
             if(this.state.loadingBarStatus === 'scaling'){
                 this.setState({loadingBarStatus : 'scaled'});
             }
@@ -236,12 +234,13 @@ export default class SideNavigation extends React.Component{
             });
         }        
     }
+    
 
     render(){
         const { arrMenu, loadingBarStatus, loadingBarTop } = this.state;
         console.log('status :', loadingBarStatus);
         return(
-            <div>
+            <div id="side-navigation-wrapper">
                 <nav className="cd-side-navigation">                    
                     <ul className="nav flex-column">
                         {arrMenu.map((val, idx) => {

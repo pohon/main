@@ -33,7 +33,7 @@ export default class SideNavLoadingBar extends React.Component{
             case 'scaled':
                 return(
                     <div id="loading_bar" style={style} 
-                        className="nav-loading-bar fade-out"></div>
+                        className="nav-loading-bar opac-visible scale expand-width"></div>
                 );
                 break;
             default:

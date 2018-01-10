@@ -134,7 +134,7 @@ body {
     opacity: 0;
     backface-visibility: hidden;
     transform: translateZ(0);
-    transition: transform 1s ease;
+    transition: transform 1s ease, width 0.5s ease;
     background-color: transparent;
     
 
@@ -145,6 +145,11 @@ body {
   &.scale{
     transform: scaleY(15);
     background-color: rebeccapurple;
+  }
+
+  &.expand-width{
+    width: 100%;
+    top:0px;
   }
 
   &.fade-out{
