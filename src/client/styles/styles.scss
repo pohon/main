@@ -52,16 +52,49 @@ body {
 
       .nav-item{
 
+        position: relative;
+
         .nav-link{
           text-align: center;
           color: #4a5261;
           font-size: 12px;
           height: 90px;
 
+          &:after{
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -4px;
+            height: 100%;
+            width: 4px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;           
+          }
+          // kalo ga active, munculin
+          &:hover{            
+            background-color: #08090b;
+            
+            &:after{
+              background-color: #83b0b9;
+              opacity: 1;
+            }
+          }
+
           &.active{
             background-color: #fff;
             color: #131519;
+
+            // kslo active, ga ush dimunculin
+            &:hover{
+            
+              &:after{
+                opacity: 0;
+              }
+            }
           }
+
+          
 
         }
 
@@ -101,9 +134,9 @@ body {
     opacity: 0;
     backface-visibility: hidden;
     transform: translateZ(0);
-    transition: all .2s ease, transform 1s ease;
-
-    background-color: rebeccapurple;
+    transition: transform 1s ease;
+    background-color: transparent;
+    
 
   &.opac-visible{
     opacity: 1;
@@ -111,6 +144,7 @@ body {
     
   &.scale{
     transform: scaleY(15);
+    background-color: rebeccapurple;
   }
 
   &.fade-out{

@@ -190,26 +190,25 @@ export default class SideNavigation extends React.Component{
             loadingBarTop : '0px'
         };
 
-        this.clickMenuIcon = this.clickMenuIcon.bind(this);
+        // this.clickMenuIcon = this.clickMenuIcon.bind(this);
         this.hoverMenuIcon = this.hoverMenuIcon.bind(this);
         this.unhoverMenuIcon = this.unhoverMenuIcon.bind(this);
+        this.clickMenuIcon = this.clickMenuIcon.bind(this);
     }
 
     // hidden > shown
     hoverMenuIcon(e){
+
         const getTop = e.target.getBoundingClientRect().top;
-        // pokoe selama gk lg scaling, boleh show
-        if(this.state.loadingBarStatus !== 'scaling'){
-            console.log('STATUS APA SIH :', this.state.loadingBarStatus);
-            this.setState({
-                loadingBarStatus : 'shown',
-                loadingBarTop : getTop
-            });
-            
-        }
+
+
+        this.setState({
+           loadingBarStatus : 'shown',
+           loadingBarTop : getTop
+        });
     }
 
-    // shown > scaling
+    // // shown > scaling
     clickMenuIcon(e){
         if(this.state.loadingBarStatus === 'shown'){
             this.setState({
@@ -218,14 +217,14 @@ export default class SideNavigation extends React.Component{
         }
     }
 
-    // scaling > scaled
+    // // scaling > scaled
     componentDidMount(){      
         const loadingBar = document.getElementById('loading_bar');
         loadingBar.addEventListener('webkitTransitionEnd', (e) => {
             // console.log('animation completed');
             if(this.state.loadingBarStatus === 'scaling'){
                 this.setState({loadingBarStatus : 'scaled'});
-            }            
+            }
         });
     }
 
