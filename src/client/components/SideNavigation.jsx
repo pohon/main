@@ -235,6 +235,7 @@ export default class SideNavigation extends React.Component{
         }        
     }
     
+    
 
     render(){
         const { arrMenu, loadingBarStatus, loadingBarTop } = this.state;

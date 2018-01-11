@@ -19,11 +19,11 @@ body {
   }
 
   .red{
-    background-color: #FC2C3D;
+    background-color: #d35657;
   }
 
   .blue{
-    background-color: #5EBBFF;
+    background-color: #83b0b9;
   }
 
   .green{
@@ -157,6 +157,203 @@ body {
   }
 
 
+  }
+
+  .cd-side-container{
+    margin: 0;
+    background: #212121;
+    display: table;
+    width: 100%;
+    height: 100vh;
+
+
+    .cd-section{
+      display: table-cell;
+      vertical-align: middle;
+      text-align:center;
+
+      // button
+      .trigger{
+        position: relative;
+        background-color: #2e334a;
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        color: transparent;
+        
+        
+        >span{
+          position: absolute;
+          width: 44px;
+          height: 4px;
+          border-radius: 10px;
+          background-color: #FBF5F3;
+          top: calc(50% - 2px);
+          left: calc(50% - 22px);
+          transition: transform .5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+
+          &:before{
+            content: '';
+            position: absolute;
+            width: 44px;
+            height: 4px;
+            border-radius: 10px;
+            background-color: #FBF5F3;
+            top: calc(50% - 16px);
+            left: calc(50% - 22px);
+          }
+
+          &:after{
+            content: '';
+            position: absolute;
+            width: 44px;
+            height: 4px;
+            border-radius: 10px;
+            background-color: #FBF5F3;
+            top: calc(50% + 12px);
+            left: calc(50% - 22px);
+          }
+        }
+
+        &:hover{          
+
+          >span{
+            transform: rotate(180deg);
+
+            &:before{
+              transform: rotate(-45deg) translateX(-14px) translateY(-4px) scaleX(0.5);
+            }
+
+            &:after{
+              transform: rotate(45deg) translateX(-13px) translateY(4px) scaleX(0.5);
+            }
+          }
+
+        }
+      }
+    }
+  
+    #keyframe_example{
+      
+      // &:hover{
+        
+        >span{
+          animation-name: tiket;
+          animation-duration: 8s;
+          // animation-delay: 2s;
+          animation-fill-mode:forwards; // retain styles from the last keyframe
+        }
+      // }
+
+      >span{
+        display: block;
+        height: 100px;
+        width: 100px;
+        background-color: #0164d3;
+        margin: 0 auto;
+      }
+
+    }
+
+    #font_example{
+      
+      display: block;
+
+      .word-wrapper{
+        position: relative;
+        color: #D16666;
+
+        b{
+          position: absolute;
+          left: 0;
+          font-weight: 300;
+
+          &.visible{
+
+            i{
+              opacity: 1;
+              transform: scale(1);
+              animation-name: scale-up;
+            }
+          }
+          
+          &.hidden{
+
+            i{
+              animation-name: scale-down;
+            }
+          }
+        }
+
+        i{
+
+          opacity: 0;
+          transform: scale(0);
+          animation-duration: .5s;
+          animation-fill-mode: backwards;
+
+          &:nth-of-type(2){
+            animation-delay: .05s;
+          }
+
+          &:nth-of-type(3){
+            animation-delay: .1s;
+          }
+
+          &:nth-of-type(4){
+            animation-delay: .15s;
+          }
+          
+          &:nth-of-type(5){
+            animation-delay: .2s;
+          }
+          
+        }
+
+        
+
+
+
+      }
+
+
+    }
+
+  }
+
+}
+
+@keyframes tiket{
+
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(0.5);
+  }
+
+  100% {
+    transform: scale(5);
+    border-radius: 50%;
+    background-color: #ffde39;
+  }
+}
+
+@keyframes scale-up {
+  
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  60%{
+    transform: scale(1.2);
+  }
+
+  100%{
+    opacity: 1;
+    transform: scale(1);
   }
 
 }
